@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Video;
 
 class VideoController extends Controller
 {
@@ -13,7 +14,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('videos.index');
+        $videos = Video::all();
+        return view('videos.index', compact('videos'));
     }
 
     /**

@@ -13,6 +13,8 @@ class CreateComentariosTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('comentarios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('descripcion');
@@ -23,7 +25,7 @@ class CreateComentariosTable extends Migration
             $table->unsignedBigInteger('id_user');         
             $table->timestamps();
 
-            
+
             $table->foreign('id_video')->references('id')->on('videos');
             $table->foreign('id_user')->references('id')->on('users');
         });

@@ -14,6 +14,7 @@ class CreateVideosTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
+        
         Schema::create('videos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
@@ -22,6 +23,7 @@ class CreateVideosTable extends Migration
             $table->enum('calificacion', [1,2,3,4,5]);
             $table->integer('visitas');
             $table->dateTime('fecha_publicacion');
+            $table->string('url');
 
             //Llaves foraneas categoria y autor del video
             $table->unsignedBigInteger('categoria_id');
