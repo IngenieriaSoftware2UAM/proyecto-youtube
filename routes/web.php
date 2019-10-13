@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Ruta donde se utiliza el controlador de videos
+Route::resource('video', 'VideoController');
