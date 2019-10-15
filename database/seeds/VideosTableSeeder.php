@@ -13,7 +13,7 @@ class VideosTableSeeder extends Seeder
     public function run()
     {
         $video1 = new Video();
-        $video1->nombre = "EL COLCHÓN QUE SE HUNDE (Broma telefónica)";
+        $video1->nombre = "movimiento naranja";
         $video1->duracion = '00:10:32';
         $video1->descripcion = "Puteando a Zellen:
                                 para celebrar el estreno de la comedia de zombis del año,
