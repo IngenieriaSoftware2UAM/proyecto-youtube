@@ -23,6 +23,7 @@
                 <p class="card-text">{{$video->calificacion}}</p>
                 <p class="card-text">{{$video->visitas}}</p>
                 <p class="card-text">{{$video->categoria_id}}</p>
+                <button type="button" class="btn btn-primary">Primary</button>
                 {{-- <a href="/trainers/{{$trainer->slug}}" class="btn btn-primary">Ver Más...</a> --}}
             </div>
         </div>
