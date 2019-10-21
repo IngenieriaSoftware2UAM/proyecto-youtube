@@ -8,7 +8,7 @@ use App\Video;
 class VideoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Metodo que saca todos los videos de la BD.
      *
      * @return \Illuminate\Http\Response
      */
@@ -47,7 +47,9 @@ class VideoController extends Controller
      */
     public function show($id)
     {
-        //
+        $video=Video::find($id);
+        // return $video;
+        return view("modals/modal",compact('video'));
     }
 
     /**
@@ -58,7 +60,8 @@ class VideoController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $video=Video::find($id);
+        // return view("modals/modal",compact('video'));
     }
 
     /**
