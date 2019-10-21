@@ -13,7 +13,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 {{-- <p>Videos</p> --}}
 <div class="row" style="background-color: white;float: left;">
     @foreach ($videos as $video)
-    <div class="col-sm"style="float:left;margin-left: 1%;background-color: white;width: 5%">
+    <div class="col-sm"style="float:left;margin-left: 1%;background-color: white;width: 5%;height:800px">
 
         <div class="card text-center" style="float:left;width:445px; margin-top: 6%;background-color: #E7EAEC;margin-left: 0.3%;">
             <video width="400" height="300" controls style="height: 310px; width: 400px; background-color: #FBFCFC ; margin: 20px;">
@@ -32,7 +32,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
             <button class = "btn btn-primary btn-sm" onclick="$var=funcion('Editar: {{$video->nombre}}')"><i class="fa fa-cog fa-spin"></i>  </button>
             <button class = "btn btn-danger btn-sm" onclick="$var=funcion('Eliminar: {{$video->nombre}}')"> <i class="fa fa-trash"></i> </button> <br>
             
-            <p style="float:right;margin:left:1px">Vistas: {{$video->visitas}}</p> 
+            <strong style="float:right;margin:left:1px">Vistas: {{$video->visitas}}</strong> 
             {{-- <a  href="video/{{$video->id}}"> dame</a> --}}
             
             <br>

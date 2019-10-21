@@ -22,10 +22,7 @@ class VideosTableSeeder extends Seeder
                                 TWITCH: https://www.twitch.tv/auronplay
                                 CANAL SECUNDARIO: https://tinyurl.com/y758oate
                                 TIENDA: https://auronshop.com/
-                                MI LIBRO: https://goo.gl/BeRm3N
-                                Sígueme en twitter: https://twitter.com/AuronPlay
-                                Sígueme en facebook: http://www.facebook.com/AuronPlayOficial
-                                Contacto: AuronPlay@gmail.com";
+                                MI LIBRO: https://goo.gl/BeRm3N";
 
         $video1->calificacion = 4;
         $video1->visitas = 1000000;
@@ -39,17 +36,13 @@ class VideosTableSeeder extends Seeder
         $video2 = new Video();
         $video2->nombre = "caida de hector";
         $video2->duracion = '00:01:32';
-        $video2->descripcion = "Puteando a Zellen:
-                                para celebrar el estreno de la comedia de zombis del año,
-                                Zombieland: Mata y Remata.  18 de octubre en cines
-
-                                TWITCH: https://www.twitch.tv/auronplay
-                                CANAL SECUNDARIO: https://tinyurl.com/y758oate
-                                TIENDA: https://auronshop.com/
-                                MI LIBRO: https://goo.gl/BeRm3N
-                                Sígueme en twitter: https://twitter.com/AuronPlay
-                                Sígueme en facebook: http://www.facebook.com/AuronPlayOficial
-                                Contacto: AuronPlay@gmail.com";
+        $video2->descripcion = "Video de bromas,realizado en Mexico
+                                en el estado Ciudad de Mexico, trata 
+                                sobre la caida de un niño llamdo Hector 
+                                al que hacen bullying cruzando sobre una
+                                fuente hidrica contaminada; finalmente
+                                el niño termina por caer en el agua sucia 
+                                e inevitablemente recibe burlas jejej   ";
 
         $video2->calificacion = 5;
         $video2->visitas = 100000000;
