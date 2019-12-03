@@ -3,17 +3,17 @@
 
 
 @section('content')
-  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
-    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'><link rel="stylesheet" 
-href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+    {{-- <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> --}}
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
 
 
    
 {{-- <p>Videos</p> --}}
 <div class="row" style="background-color: white;float: left;">
     @foreach ($videos as $video)
-    <div class="col-sm"style="float:left;margin-left: 1%;background-color: white;width: 5%;height:800px">
+    <div class="col-sm" style="float:left;margin-left: 1%;background-color: white;width: 5%;height:800px">
 
         <div class="card text-center" style="float:left;width:445px; margin-top: 6%;background-color: #E7EAEC;margin-left: 0.3%;">
             <video width="400" height="300" controls style="height: 310px; width: 400px; background-color: #FBFCFC ; margin: 20px;">
@@ -34,20 +34,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
             
             <strong style="float:right;margin:left:1px">Vistas: {{$video->visitas}}</strong> 
             {{-- <a  href="video/{{$video->id}}"> dame</a> --}}
-            
-            <br>
-            <hr>
+            <br><hr>
             <h6 style="float:left;margin:left:1px">Descripción: </h6> 
 
             <p style="float:left;margin:left:1px"class="card-text">{{$video->descripcion}}</p>
             {{-- <p class="card-text">{{$video->duracion}}</p> --}}
-
             <b style="float:left;margin:left:6px;" class="card-text">Calificación: {{$video->calificacion}}</b> <br> <br>
             <br>
             <b style="margin:left:10px;" class="card-text">Categoria: {{$video->categoria_id}}</b>
             
         </div>
     </div>
+    <button type="button" class="btn btn-primary">Info</button>
     </div>
     @endforeach
 
@@ -88,7 +86,5 @@ href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         </div>
     </div>
     {{-- Fin Ventana Modal --}}
- 
-
       
 @endsection
