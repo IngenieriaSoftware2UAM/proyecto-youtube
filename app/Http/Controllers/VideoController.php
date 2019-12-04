@@ -25,7 +25,8 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        $videos= Video::All();
+        return view('videos.create');
     }
 
     /**
@@ -36,7 +37,36 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $user=$request->user();
+        $video = new Video();
+        $video->nombre=$request->input('titulo');
+        $video->duracion = '00:10:32';////
+        $video->descripcion=$request->input('descripcion');
+        $video->calificacion = 4;////
+        $video->visitas = 1000000;//
+            $now = new \DateTime();
+        $video->fecha_publicacion =  $now->format('Y-m-d H:i:s');//
+        if($request->hasFile('video'))
+        {   
+            $file=$request->file('video');
+            $name=time().$file->getClientOriginalName();//Da un nombre único con fecha
+            $video->url=$name;
+            $file->move(public_path().'/videos/',$name);//Guarda el file en esa ruta
+        }
+        if($request->hasFile('imagen'))
+        {   
+            $file=$request->file('imagen');
+            $img=time().$file->getClientOriginalName();//Da un nombre único con fecha
+            $video->imagen=$img;
+            $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
+        }
+        $video->categoria_id = 1;
+        $video->user_id = $request->user()->id;
+        
+    
+        $video ->save();
+        return "si";
+        // return redirect()->route('videos.index');
     }
 
     /**
