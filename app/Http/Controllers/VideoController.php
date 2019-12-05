@@ -41,6 +41,13 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
+        // validación de los campos al momento de guardar el recurso.
+        $validatedData=$request->validate([
+            'titulo'=>'required|max:50|min:5',
+            'descripcion' => 'required|max:250|min:3',
+            'imagen' => 'mimes:jpg,JPG,jpeg',
+            'video'=>'mimes:mp4'
+        ]);
         // $user=$request->user();
         $video = new Video();
         $video->nombre=$request->input('titulo');

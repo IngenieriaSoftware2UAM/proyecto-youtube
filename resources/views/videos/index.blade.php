@@ -32,33 +32,33 @@
                 <form class="form-group"  method="POST" action="{{ url('video/'.$video->id)}}" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
-                    <button type="submit"  class="btn btn-danger" id="Boton3" >Eliminar</button>
+                    <button type="submit"  class="btn btn-danger" id="Boton3" onclick="return confirmDelete('{{$video->nombre}}')">Eliminar</button>
                 </form>
 
-                {{-- <div class="card-body">
-                    <p class="card-text"> {{$video->user_id}}</p>
-                {{-- <a href="#" class="btn btn-primary">Go somewhere</a> 
-                </div> --}}
           </div>
+          
         @endforeach 
      
     
       
         
     </div>
-    
-    {{-- <script>
-        funcion=function(accion) {
-          // bot = document.getElementById("jaja");
-          // bot.onClick(alert("jajajajaj"));
-           alert(accion);       
-            //  $var =video;
-            // alert(video);
-            // $('#mNombre',exampleModal).val($var);
-            // $('#exampleModal').modal('show');
-            return $var;
-        };
-    </script> --}}
+  
+        <script >
+            function confirmDelete ( video ) 
+            {
+                var respuesta= confirm ("Desea eliminar el video: "+video);
+                if(respuesta==true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        </script>
+     
     <div style="margin-left:420px;margin-top:50px">
             {{$videos->links()}} 
         </div>

@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="container" style="width:680px;background-color:cornsilk;margin-top:80px">
+<div class="container" style="width:680px;background-color:cornsilk;margin-top:80px;border-style: solid;border-color: darkgray">
     <h2>Actualizar</h2>
         <form class="form-group"  method="POST" action="{{ url('/video/'.$video->id)}}" enctype="multipart/form-data">
             @method('PUT')
@@ -25,7 +25,7 @@
                     <input type="file" value="{{$video->url}}" name="video"  >
                 </div>
             
-            <a style="margin-top:1px;margin-left:50px" class="btn btn-info" href="{{ url('/video')}}"><i class="fa fa-reply" ></i> Regresar</a> 
+            <a style="margin-top:1px;margin-left:230px" class="btn btn-info" href="{{ url('/video')}}"><i class="fa fa-reply" ></i> Regresar</a> 
             <button type="submit"  class="btn btn-primary">Actualizar</button>        
         </form>
         
