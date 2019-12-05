@@ -3,7 +3,7 @@
 
 @section('content')
 
-    {{-- @include('common.errors')        --}}
+    {{-- @include('common.errors') valida sobre el tipo de dato--}} 
     <ul>
         @if($errors->any())
                 <div class="alert alert-danger">
@@ -12,7 +12,7 @@
                 @endforeach
                 </div>
         @endif
-</ul> 
+    </ul> 
 <form class="form-group"  method="POST" action="{{ url('/video')}}" enctype="multipart/form-data">
         @csrf
         {{-- @include('trainers.form') --}}

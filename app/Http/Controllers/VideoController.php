@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Video;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -14,7 +15,9 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::all();
+        // $videos = Video::all();
+        // $videos = App\Video::paginate(3);
+        $videos=DB::table('videos')->paginate(4);
         return view('videos.index', compact('videos'));
     }
 
@@ -25,7 +28,8 @@ class VideoController extends Controller
      */
     public function create()
     {
-        $videos= Video::All();
+        // $videos= Video::All();
+        $videos= Video::paginate(3);
         return view('videos.create');
     }
 
@@ -70,7 +74,7 @@ class VideoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un video en especifico.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -78,8 +82,10 @@ class VideoController extends Controller
     public function show($id)
     {
         $video=Video::find($id);
-        // return $video;
-        return view("modals/modal",compact('video'));
+        return view("videos.show",compact('video'));
+
+        // $videos = Video::all();
+        // return view('videos.show', compact('videos'));
     }
 
     /**
@@ -88,9 +94,10 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Video $video)
     {
         // $video=Video::find($id);
+        return view('videos.edit',compact('video'));
         // return view("modals/modal",compact('video'));
     }
 
@@ -101,9 +108,29 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Video $video)
     {
-        //
+        $video->fill($request->except('imagen','video'));
+        $video->nombre=$request->input('titulo');
+        $video->descripcion=$request->input('descripcion');
+        if($request->hasFile('video'))
+        {   
+            $file=$request->file('video');
+            $name=time().$file->getClientOriginalName();//Da un nombre único con fecha
+            $video->url=$name;
+            $file->move(public_path().'/videos/',$name);//Guarda el file en esa ruta
+        }
+        if($request->hasFile('imagen'))
+        {   
+            $file=$request->file('imagen');
+            $img=time().$file->getClientOriginalName();//Da un nombre único con fecha
+            $video->imagen=$img;
+            $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
+        }
+        $video ->save();
+        return "Actualizado";
+        // return redirect()->route('trainers.show',compact('trainer')
+        //     )->with('status','Entrenador Actualizado Correctamente');
     }
 
     /**
@@ -112,8 +139,15 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Video $video)
     {
-        //
+        $file_path=public_path().'/images/'.$video->imagen;
+        \File::delete($file_path);
+        $file_path2=public_path().'/videos/'.$video->url;
+        \File::delete($file_path2);
+
+        $video->delete();
+        return "Borrado";
+        // return redirect()->route('trainers.index');
     }
 }
