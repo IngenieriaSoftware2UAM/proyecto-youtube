@@ -13,10 +13,11 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $videos = Video::all();
         // $videos = App\Video::paginate(3);
+        $request->user()->authorizeRoles(['user','admin']);
         $videos=DB::table('videos')->paginate(4);
         return view('videos.index', compact('videos'));
     }
@@ -146,15 +147,24 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy(Video $video,Request $request)
     {
-        $file_path=public_path().'/images/'.$video->imagen;
-        \File::delete($file_path);
-        $file_path2=public_path().'/videos/'.$video->url;
-        \File::delete($file_path2);
+        // $request->user()->authorizeRoles(['user']);
+        // 
+        $user = auth()->user();
+        if($user->id==$video->user_id || $user->name=='Admin')//se debe cambiar la validación para el admin que no sea por nombre sino por rol.
+        {
+            $file_path=public_path().'/images/'.$video->imagen;
+            \File::delete($file_path);
+            $file_path2=public_path().'/videos/'.$video->url;
+            \File::delete($file_path2);
+            $video->delete();
+        }
+        else{
+            abort(401,'Acción No Autorizada Sin Permiso');
+        }
 
-        $video->delete();
-        return "Borrado";
-        // return redirect()->route('trainers.index');
+        // return $user;
+        return redirect()->route('video.index');
     }
 }

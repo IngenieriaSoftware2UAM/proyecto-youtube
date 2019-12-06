@@ -43,7 +43,6 @@
       
         
     </div>
-  
         <script >
             function confirmDelete ( video ) 
             {
