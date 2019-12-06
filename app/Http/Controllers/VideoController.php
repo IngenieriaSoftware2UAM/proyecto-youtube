@@ -17,7 +17,7 @@ class VideoController extends Controller
     {
         // $videos = Video::all();
         // $videos = App\Video::paginate(3);
-        $request->user()->authorizeRoles(['user','admin']);
+        // $request->user()->authorizeRoles(['user','admin']);
         $videos=DB::table('videos')->paginate(4);
         return view('videos.index', compact('videos'));
     }
