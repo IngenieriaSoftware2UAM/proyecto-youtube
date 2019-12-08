@@ -26,8 +26,12 @@ class CreateComentariosTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('id_video')->references('id')->on('videos');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_video')->references('id')->on('videos')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 

@@ -29,3 +29,5 @@ Route::resource('video', 'VideoController');
 Route::post('/comentario/{id}', 'ControladorComentario@store');
 //Para eliminar cometario
 Route::delete('/comentario/{comentario}', 'ControladorComentario@delete');
+
+Route::get('/video/buscador','VideoController@buscar');

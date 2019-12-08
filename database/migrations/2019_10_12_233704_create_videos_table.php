@@ -31,10 +31,14 @@ class CreateVideosTable extends Migration
             $table->timestamps();
 
             $table->foreign('categoria_id')
-                  ->references('id')->on('categorias');
+                  ->references('id')->on('categorias')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
                   
             $table->foreign('user_id')
-                  ->references('id')->on('users');
+                  ->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
         });
     }

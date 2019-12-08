@@ -44,8 +44,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.nam', 'MyTube') }}
                 </a>
-                <a href="{{ url('/video/create') }}" class="btn btn-success ">
-                     <i class="fa fa-plus"></i>Crear</a>
+
+                    <a style="margin-top:5px;margin-left:10px" href="{{ url('/video/create') }}" class="btn btn-success ">
+                        <i class="fa fa-plus"></i>Crear</a>
+        
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,7 +55,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -91,6 +93,7 @@
                 </div>
             </div>
         </nav>
+   
 
         <main class="container">
             @yield('content')

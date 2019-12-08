@@ -31,7 +31,8 @@ class ControladorComentario extends Controller
         $video=Video::find($comentario->id_video);
 
         $user = auth()->user();//Si el user logueado fué el q creó el video o si es Admin.
-        if($user->id==$comentario->id_user || $user->name=='Admin')//se debe cambiar la validación para el admin que no sea por nombre sino por rol.
+        $role=$user->roles();
+        if($user->id==$comentario->id_user || $user->name=='Admin')
         {
             $comentario->delete();
         }

@@ -50,7 +50,8 @@
                                     @endif
                                 </div>
                                 
-                                <button style="margin-left:600px;width: 30px;" onclick="return confirmDelete('{{$comentario->id}}')" class = "btn btn-danger btn-sm" > <i class="fa fa-trash"></i> </button>
+                                <button style="margin-left:600px;width: 30px;" onclick="return confirmDelete('{{$comentario->id}}')" 
+                                    class = "btn btn-danger btn-sm" > <i class="fa fa-trash"></i> </button>
                             </form>
                             
                             {{-- <br> --}}

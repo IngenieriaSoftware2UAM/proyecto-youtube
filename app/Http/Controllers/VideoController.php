@@ -127,27 +127,35 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-        $video->fill($request->except('imagen','video'));
-        $video->nombre=$request->input('titulo');
-        $video->descripcion=$request->input('descripcion');
-        if($request->hasFile('video'))
-        {   
-            $file=$request->file('video');
-            $name=time().$file->getClientOriginalName();//Da un nombre único con fecha
-            $video->url=$name;
-            $file->move(public_path().'/videos/',$name);//Guarda el file en esa ruta
-        }
-        if($request->hasFile('imagen'))
-        {   
-            $file=$request->file('imagen');
-            $img=time().$file->getClientOriginalName();//Da un nombre único con fecha
-            $video->imagen=$img;
-            $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
-        }
-        $video ->save();
-        return redirect()->route('video.show',compact('video'))->
-        with('status','Video Actualizado Correctamente');
-        // return redirect()->route('video.index');
+        $user = auth()->user();//Saca el usuario logueado.
+        $role=$user->roles();
+        if($user->id==$video->user_id || $user->name=='Admin')
+        {
+            $video->fill($request->except('imagen','video'));
+            $video->nombre=$request->input('titulo');
+            $video->descripcion=$request->input('descripcion');
+            if($request->hasFile('video'))
+            {   
+                $file=$request->file('video');
+                $name=time().$file->getClientOriginalName();//Da un nombre único con fecha
+                $video->url=$name;
+                $file->move(public_path().'/videos/',$name);//Guarda el file en esa ruta
+            }
+            if($request->hasFile('imagen'))
+            {   
+                $file=$request->file('imagen');
+                $img=time().$file->getClientOriginalName();//Da un nombre único con fecha
+                $video->imagen=$img;
+                $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
+            }
+            $video ->save();
+            return redirect()->route('video.show',compact('video'))->
+            with('status','Video Actualizado Correctamente');
+            // return redirect()->route('video.index');
+        }  
+        else{
+            abort(401,'Acción No Autorizada Sin Permiso');
+        }  
     }
 
     /**
@@ -177,4 +185,11 @@ class VideoController extends Controller
         return redirect()->route('video.index')->
         with('status','Video Eliminado Correctamente');;
     }
+
+    public function buscar(Request $request)
+    {
+        $videos=Video::where('nombre','like',$request->text.'%')->take(2)->get();
+        return view('videos.index', compact('videos'));
+    }
+
 }
