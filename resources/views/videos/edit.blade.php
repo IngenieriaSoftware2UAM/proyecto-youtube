@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Descripción</label>
-                    <input type="text" name="descripcion" value="{{$video->nombre}}" class="form-control">
+                    <input type="text" name="descripcion" value="{{$video->descripcion}}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Imagen</label>

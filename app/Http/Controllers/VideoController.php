@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Video;
+use App\User;
+use App\Comentario;
 use Illuminate\Support\Facades\DB;
+
 
 class VideoController extends Controller
 {
@@ -14,12 +17,19 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        // $videos = Video::all();
+    { 
+        $user=$request->user();
+        if ($user!=null)
+        {
+            $videos=DB::table('videos')->paginate(4);
+            return view('videos.index', compact('videos'));
+        }
+        else{
+            return view('Auth.login') ;
+        }
         // $videos = App\Video::paginate(3);
         // $request->user()->authorizeRoles(['user','admin']);
-        $videos=DB::table('videos')->paginate(4);
-        return view('videos.index', compact('videos'));
+        
     }
 
     /**
@@ -77,8 +87,8 @@ class VideoController extends Controller
         
     
         $video ->save();
-        return "si";
-        // return redirect()->route('videos.index');
+        return redirect()->route('video.index')->
+        with('status','Video Creado Correctamente');;
     }
 
     /**
@@ -90,10 +100,9 @@ class VideoController extends Controller
     public function show($id)
     {
         $video=Video::find($id);
-        return view("videos.show",compact('video'));
-
-        // $videos = Video::all();
-        // return view('videos.show', compact('videos'));
+        $user=User::find($video->user_id);//Para enviar el usuario que creo el video.
+        $comentarios=Comentario::All()->where('id_video',$video->id);
+        return view("videos.show",compact('video','user','comentarios'));
     }
 
     /**
@@ -104,7 +113,7 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
-        // $video=Video::find($id);
+        //  $video=Video::find($id);
         return view('videos.edit',compact('video'));
         // return view("modals/modal",compact('video'));
     }
@@ -136,9 +145,9 @@ class VideoController extends Controller
             $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
         }
         $video ->save();
-        return "Actualizado";
-        // return redirect()->route('trainers.show',compact('trainer')
-        //     )->with('status','Entrenador Actualizado Correctamente');
+        return redirect()->route('video.show',compact('video'))->
+        with('status','Video Actualizado Correctamente');
+        // return redirect()->route('video.index');
     }
 
     /**
@@ -150,8 +159,8 @@ class VideoController extends Controller
     public function destroy(Video $video,Request $request)
     {
         // $request->user()->authorizeRoles(['user']);
-        // 
-        $user = auth()->user();
+  
+        $user = auth()->user();//Saca el usuario logueado.
         if($user->id==$video->user_id || $user->name=='Admin')//se debe cambiar la validación para el admin que no sea por nombre sino por rol.
         {
             $file_path=public_path().'/images/'.$video->imagen;
@@ -165,6 +174,7 @@ class VideoController extends Controller
         }
 
         // return $user;
-        return redirect()->route('video.index');
+        return redirect()->route('video.index')->
+        with('status','Video Eliminado Correctamente');;
     }
 }
