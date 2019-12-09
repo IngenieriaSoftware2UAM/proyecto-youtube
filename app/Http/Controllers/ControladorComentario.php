@@ -32,14 +32,15 @@ class ControladorComentario extends Controller
 
         $user = auth()->user();//Si el user logueado fué el q creó el video o si es Admin.
         $role=$user->roles();
-        if($user->id==$comentario->id_user || $user->name=='Admin')
+        if($user->id==$comentario->id_user || $user->id==1)
         {
             $comentario->delete();
         }
         else{
             abort(401,'Acción No Autorizada Sin Permiso');
         }
-        return redirect()->route('video.show',compact('video'));
+        return redirect()->route('video.show',compact('video'))->
+        with('status','Comentario Eliminado Correctamente');
         // return redirect()->route('video.index');
     }
 }

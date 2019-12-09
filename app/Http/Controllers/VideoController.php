@@ -102,6 +102,7 @@ class VideoController extends Controller
         $video=Video::find($id);
         $user=User::find($video->user_id);//Para enviar el usuario que creo el video.
         $comentarios=Comentario::All()->where('id_video',$video->id);
+
         return view("videos.show",compact('video','user','comentarios'));
     }
 
@@ -129,7 +130,7 @@ class VideoController extends Controller
     {
         $user = auth()->user();//Saca el usuario logueado.
         $role=$user->roles();
-        if($user->id==$video->user_id || $user->name=='Admin')
+        if($user->id==$video->user_id || $user->id==1)//El user de id=1 Es ADMIN
         {
             $video->fill($request->except('imagen','video'));
             $video->nombre=$request->input('titulo');
@@ -149,8 +150,11 @@ class VideoController extends Controller
                 $file->move(public_path().'/images/',$img);//Guarda el file en esa ruta
             }
             $video ->save();
+  
+
             return redirect()->route('video.show',compact('video'))->
             with('status','Video Actualizado Correctamente');
+
             // return redirect()->route('video.index');
         }  
         else{
@@ -169,7 +173,7 @@ class VideoController extends Controller
         // $request->user()->authorizeRoles(['user']);
   
         $user = auth()->user();//Saca el usuario logueado.
-        if($user->id==$video->user_id || $user->name=='Admin')//se debe cambiar la validación para el admin que no sea por nombre sino por rol.
+        if($user->id==$video->user_id || $user->id==1)//se debe cambiar la validación para el admin que no sea por nombre sino por rol.
         {
             $file_path=public_path().'/images/'.$video->imagen;
             \File::delete($file_path);
@@ -183,13 +187,13 @@ class VideoController extends Controller
 
         // return $user;
         return redirect()->route('video.index')->
-        with('status','Video Eliminado Correctamente');;
+        with('status','Video Eliminado Correctamente');
     }
 
-    public function buscar(Request $request)
-    {
-        $videos=Video::where('nombre','like',$request->text.'%')->take(2)->get();
-        return view('videos.index', compact('videos'));
-    }
+    // public function buscar(Request $request)
+    // {
+    //     $videos=Video::where('nombre','like',$request->text.'%')->take(2)->get();
+    //     return view('videos.index', compact('videos'));
+    // }
 
 }

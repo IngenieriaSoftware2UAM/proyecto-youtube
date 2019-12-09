@@ -7,8 +7,8 @@
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 
 
-    <div class="container" style="float:left;background-color:white;margin-top:70px;margin-left:120px">
-        <div class="container">  
+    <div class="container" style="float:left;background-color:white;margin-top:70px;margin-left:140px">
+        {{-- <div class="container">  
             <div class="col-8">
                     <div class="input-group">
                         <input type="text" class="form-control" id="texto" placeholder="Ingrese nombre">
@@ -19,9 +19,9 @@
             <!-- fin del html agregado-->
                 <div class="col-8" id="contenedor">
                     {{-- @include('videos.index') --}}
-                </div>
+                {{-- </div>
                 <div id="cargando" hidden><h1>CARGANDO...</h1></div>
-        </div>      
+        </div>       --}} 
 
 
         @foreach ($videos as $video)

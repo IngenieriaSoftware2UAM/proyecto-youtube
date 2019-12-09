@@ -48,6 +48,7 @@
                                     @else
                                         <small>Comentado por: User</small>       
                                     @endif
+                                <small>{{$comentario->fecha}}</small>
                                 </div>
                                 
                                 <button style="margin-left:600px;width: 30px;" onclick="return confirmDelete('{{$comentario->id}}')" 
